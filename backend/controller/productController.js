@@ -111,3 +111,32 @@ export const searchProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+export const getBooks = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: "Book" });
+  if (products) {
+    res.status(200).json(products);
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+});
+export const getElectronics = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: "Electronics" });
+  if (products) {
+    res.status(200).json(products);
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+});
+
+export const getFoods = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: "Food" });
+  if (products) {
+    res.status(200).json(products);
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+});

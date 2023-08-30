@@ -61,6 +61,27 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["Product"],
     }),
+    getFood: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/foods`,
+        method: "POST",
+      }),
+      providesTags: ["Product"],
+    }),
+    getBook: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/books`,
+        method: "POST",
+      }),
+      providesTags: ["Product"],
+    }),
+    getElectronics: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/electronics`,
+        method: "POST",
+      }),
+      providesTags: ["Product"],
+    }),
   }),
 });
 export const {
@@ -72,4 +93,7 @@ export const {
   useDeleteProductMutation,
   useCreateReviewMutation,
   useSearchPageQuery,
+  useGetBookQuery,
+  useGetFoodQuery,
+  useGetElectronicsQuery,
 } = productsApiSlice;

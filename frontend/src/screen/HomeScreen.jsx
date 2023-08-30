@@ -7,6 +7,8 @@ import { useGetProductsQuery } from "../slices/productApiSlice";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import { Jumbotron } from "react-bootstrap";
+import ProductCarousel from "../components/ProductCarousel";
+import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
@@ -42,13 +44,55 @@ const HomeScreen = () => {
             </p>
           </div>
           <h1>Latest Products</h1>
-          <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
+          <ProductCarousel />
+          <div className="my-2">
+            <h1>Electronics</h1>
+            <Row>
+              {products
+                .filter((product) => product.category === "Electronics")
+                .map((product) => (
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
+            </Row>
+            <p className="text-center">
+              {" "}
+              <Link to="/products/electronics"> View All</Link>
+            </p>
+          </div>
+          <div className="my-2">
+            <h1>Books</h1>
+            <Row>
+              {products
+                .filter((product) => product.category === "Book")
+                .map((product) => (
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
+            </Row>
+            <p className="text-center">
+              {" "}
+              <Link to="/products/books"> View All</Link>
+            </p>
+          </div>
+          <div className="my-2">
+            <h1>Foods</h1>
+            <Row>
+              {products
+                .filter((product) => product.category === "Food")
+                .map((product) => (
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
+            </Row>
+            <p className="text-center">
+              {" "}
+              <Link to="/products/foods"> View All</Link>
+            </p>
+          </div>
         </>
       )}
     </>

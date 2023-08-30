@@ -30,6 +30,9 @@ import ProductEditScreen from "./screen/admin/ProductEditScreen";
 import UserListScreen from "./screen/admin/UserListScreen";
 import UserEditScreen from "./screen/admin/UserEditScreen";
 import SearchPage from "./screen/SearchPage";
+import FoodScreen from "./screen/FoodScreen";
+import BookScreen from "./screen/BookScreen";
+import ElectronicsScreen from "./screen/ElectronicsScreen";
 
 //route
 const router = createBrowserRouter(
@@ -41,6 +44,9 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/product/search/:keyword" element={<SearchPage />} />
+      <Route path="/products/foods" element={<FoodScreen />} />
+      <Route path="/products/books" element={<BookScreen />} />
+      <Route path="/products/electronics" element={<ElectronicsScreen />} />
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
