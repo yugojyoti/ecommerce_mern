@@ -50,6 +50,7 @@ const HomeScreen = () => {
             <Row>
               {products
                 .filter((product) => product.category === "Electronics")
+                .slice(4, 10)
                 .map((product) => (
                   <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                     <Product product={product} />
@@ -66,6 +67,7 @@ const HomeScreen = () => {
             <Row>
               {products
                 .filter((product) => product.category === "Book")
+                .slice(0, 6)
                 .map((product) => (
                   <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                     <Product product={product} />
@@ -82,6 +84,7 @@ const HomeScreen = () => {
             <Row>
               {products
                 .filter((product) => product.category === "Food")
+                .slice(2, 8)
                 .map((product) => (
                   <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                     <Product product={product} />

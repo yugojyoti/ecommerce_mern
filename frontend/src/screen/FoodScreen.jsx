@@ -4,11 +4,19 @@ import Product from "../components/Product";
 import { Col, Form, Row } from "react-bootstrap";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
+import ReactPaginate from "react-paginate";
 
 const FoodScreen = () => {
   const [rating, setRating] = useState(0);
   const [price, setPrice] = useState(2000);
   const [productFilter, setProductFilter] = useState([]);
+
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const [pageCount, setPageCount] = useState(0);
+  const dataPerPage = 6;
+  const pagesVisted = pageNumber * dataPerPage;
+
   const { data: products, isLoading, error } = useGetFoodQuery();
 
   useEffect(() => {
@@ -16,10 +24,19 @@ const FoodScreen = () => {
       const filterValue = products.filter(
         (product) => product.rating >= rating && product.price <= price
       );
-      console.log(filterValue);
-      setProductFilter(filterValue);
+      const pageCount = Math.ceil(filterValue.length / dataPerPage);
+      setPageCount(pageCount);
+      const sproduct = filterValue.slice(
+        pagesVisted,
+        pagesVisted + dataPerPage
+      );
+      setProductFilter(sproduct);
     }
-  }, [products, price, rating]);
+  }, [products, price, rating, pagesVisted]);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <>
@@ -84,6 +101,23 @@ const FoodScreen = () => {
                   </Col>
                 ))}
               </Row>
+
+              <div className="my-5">
+                <ReactPaginate
+                  previousLabel={"Previous"}
+                  nextLabel={"Next"}
+                  pageCount={pageCount}
+                  onPageChange={changePage}
+                  containerClassName=" pagination justify-content-center "
+                  pageClassName="page-item "
+                  pageLinkClassName="page-item btn"
+                  previousLinkClassName="page-link "
+                  nextLinkClassName="page-link "
+                  disabledClassName="page-item diabled "
+                  activeClassName="page-item active "
+                  activeLinkClassName="page-item btn btn-primary"
+                />
+              </div>
             </>
           )}
         </Col>

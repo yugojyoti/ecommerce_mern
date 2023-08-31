@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaTimes, FaEdit, FaTrash } from "react-icons/fa";
@@ -11,14 +11,29 @@ import Loading from "../../components/Loading";
 import { useCreateProductMutation } from "../../slices/productApiSlice";
 
 import { toast } from "react-toastify";
+import ReactPaginate from "react-paginate";
 
 const ProductListScreen = () => {
+  const [pageNumber, setPageNumber] = useState(0);
+  const [selectProduct, setSelectProduct] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const dataPerPage = 8;
+  const pagesVisted = pageNumber * dataPerPage;
+
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
 
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
   const [deleteProduct, { isLoading: loadingDelete }] =
     useDeleteProductMutation();
+  useEffect(() => {
+    if (products) {
+      const pageCount = Math.ceil(products.length / dataPerPage);
+      setPageCount(pageCount);
+      const sproduct = products.slice(pagesVisted, pagesVisted + dataPerPage);
+      setSelectProduct(sproduct);
+    }
+  }, [products, pagesVisted]);
 
   const deleteHandler = async (productId) => {
     if (window.confirm("Are you sure?")) {
@@ -40,6 +55,9 @@ const ProductListScreen = () => {
         toast.error(error?.data?.message || error.error);
       }
     }
+  };
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
   };
   return (
     <>
@@ -73,7 +91,7 @@ const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {selectProduct.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -102,6 +120,22 @@ const ProductListScreen = () => {
           </Table>
         </>
       )}
+      <div className="my-5">
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName=" pagination justify-content-center "
+          pageClassName="page-item "
+          pageLinkClassName="page-item btn"
+          previousLinkClassName="page-link "
+          nextLinkClassName="page-link "
+          disabledClassName="page-item diabled "
+          activeClassName="page-item active "
+          activeLinkClassName="page-item btn btn-primary"
+        />
+      </div>
     </>
   );
 };

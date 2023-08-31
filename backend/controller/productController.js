@@ -102,8 +102,22 @@ export const createProductReview = asyncHandler(async (req, res) => {
 export const searchProduct = asyncHandler(async (req, res) => {
   const { keyword } = req.params;
   const products = await Product.find({
-    name: { $regex: keyword, $options: "i" },
+    $or: [
+      {
+        name: { $regex: keyword, $options: "i" },
+      },
+      {
+        description: { $regex: keyword, $options: "i" },
+      },
+      {
+        category: { $regex: keyword, $options: "i" },
+      },
+      {
+        brand: { $regex: keyword, $options: "i" },
+      },
+    ],
   });
+  console.log(products);
   if (products) {
     res.status(200).json(products);
   } else {
