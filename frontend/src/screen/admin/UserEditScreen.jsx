@@ -22,7 +22,6 @@ const UserEditScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState("");
-  const [isAdminText, setIsAdminText] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -41,7 +40,7 @@ const UserEditScreen = () => {
       email,
       isAdmin,
     };
-    console.log(updatedUser);
+
     const result = await updateUser(updatedUser);
     if (result.error) {
       toast.error(result.error);

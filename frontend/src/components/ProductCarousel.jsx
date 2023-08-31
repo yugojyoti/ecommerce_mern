@@ -22,17 +22,15 @@ const ProductCarousel = () => {
   return isLoading ? null : error ? (
     <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
-    <Carousel pause="hover" className=" mb-4 ">
-      {productRandom.map((product) => (
+    <Carousel pause="hover" className="bg-dark mb-4">
+      {products.map((product) => (
         <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`} style={{ color: "#FFF" }}>
+          <Link to={`/product/${product._id}`}>
             <Image
               src={product.image}
               alt={product.name}
-              fluid
               height={400}
-              width={600}
-              className="d-block w-100 "
+              width={400}
             />
             <Carousel.Caption className="carousel-caption">
               <h2 className="text-white text-right">

@@ -33,17 +33,6 @@ const ProductScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [product, setProduct] = useState([]);
-
-  // const fetchProduct = async () => {
-  //   const { data } = await axios.get(
-  //     `${process.env.REACT_APP_BACKEND}/products/${productId}`
-  //   );
-  //   setProduct(data);
-  // };
-  // useEffect(() => {
-  //   fetchProduct();
-  // });
   const {
     data: product,
     isLoading,

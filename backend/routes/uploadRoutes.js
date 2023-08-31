@@ -30,7 +30,7 @@ function checkFileType(file, cb) {
 const upload = multer({ storage });
 router.post("/", upload.single("image"), (req, res) => {
   const path1 = path.relative(from, req.file.path).split("\\").join("/");
-  console.log(path1);
+
   res.send({ message: "Image Uploaded", image: `/${path1}` });
 });
 

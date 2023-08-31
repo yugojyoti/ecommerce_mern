@@ -9,7 +9,7 @@ import Product from "../components/Product";
 const SearchPage = () => {
   const { keyword } = useParams();
   const { data: products, isLoading, error } = useSearchPageQuery(keyword);
-  console.log(products);
+
   return (
     <>
       {isLoading ? (

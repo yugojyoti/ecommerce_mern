@@ -6,22 +6,11 @@ import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productApiSlice";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
-import { Jumbotron } from "react-bootstrap";
+
 import ProductCarousel from "../components/ProductCarousel";
 import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
-  // const [products, setProducts] = useState([]);
-  // const fetchProducts = async () => {
-  //   const { data } = await axios.get(
-  //     `${process.env.REACT_APP_BACKEND}/products`
-  //   );
-  //   setProducts(data);
-  // };
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, []);
-
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
