@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser, FaArchive } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoginMutation, useLogoutMutation } from "../slices/usersApiSlice";
+import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import SearchBox from "./SearchBox";
@@ -41,21 +41,23 @@ const Header = () => {
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <LinkContainer to="/products/electronics" className="mx-2">
-                <Nav.Link>Electronics</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/products/books" className="mx-2">
-                <Nav.Link>Books</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/products/foods" className="mx-2">
-                <Nav.Link>Foods</Nav.Link>
-              </LinkContainer>
+            <Nav className="ms-auto d-flex align-items-center">
+              <div className="d-flex justify-content-start">
+                <LinkContainer to="/products/electronics" className="mx-2">
+                  <Nav.Link>Electronics</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/products/books" className="mx-2">
+                  <Nav.Link>Books</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/products/foods" className="mx-2">
+                  <Nav.Link>Foods</Nav.Link>
+                </LinkContainer>
+              </div>
 
               <SearchBox />
 
               <LinkContainer to="/cart">
-                <Nav.Link>
+                <Nav.Link className="d-inline-block">
                   <FaShoppingCart />
                   Cart
                   {cartItems.length > 0 && (
